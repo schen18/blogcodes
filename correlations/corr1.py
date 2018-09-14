@@ -24,8 +24,8 @@ pcorr=[]
 pscorr=[]
 
 for s in range(nsim):
-    x=np.random.random_integers(1,nhigh,nsize)
-    y=np.random.random_integers(1,nhigh,nsize)
+    x=np.random.randint(1,nhigh+1,size=nsize)
+    y=np.random.randint(1,nhigh+1,size=nsize)
     pcorr.append(np.corrcoef(x,y)[0,1])
     # extracts first 30 items from x,y and calculates correlation
     xs=x[:30] 
