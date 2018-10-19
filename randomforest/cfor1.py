@@ -46,11 +46,11 @@ if nrand>0:
             r=np.random.randint(nrange[0],(nrange[1])**(i+1),size=len(df.index))
             idf[col_name] = pd.Series(r)
 
-        X = np.array(idf[yvar])
-        Y = np.array(idf.drop(yvar,axis=1))
+        Y = np.array(idf[yvar])
+        X = np.array(idf.drop(yvar,axis=1))
         
         # Split the data into training and testing sets
-        train_features, test_features, train_labels, test_labels = train_test_split(Y, X, test_size = 0.25)
+        train_features, test_features, train_labels, test_labels = train_test_split(X, Y, test_size = 0.25)
         rf = RandomForestClassifier(n_estimators=trees, max_depth=len(xvar))
         rf.fit(train_features, train_labels);
         
@@ -79,11 +79,11 @@ if nrand>0:
     plt.show()
 
 else:
-    X = np.array(df[yvar])
-    Y = np.array(df.drop(yvar,axis=1))
+    Y = np.array(df[yvar])
+    X = np.array(df.drop(yvar,axis=1))
     
     # Split the data into training and testing sets
-    train_features, test_features, train_labels, test_labels = train_test_split(Y, X, test_size = 0.25)
+    train_features, test_features, train_labels, test_labels = train_test_split(X, Y, test_size = 0.25)
     
     # Instantiate model with 100 decision trees
     rf = RandomForestClassifier(n_estimators=trees, max_depth=len(xvar))
