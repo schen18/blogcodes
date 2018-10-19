@@ -16,7 +16,7 @@ Set parameters below
 """
 nsim=100
 nrange=[0,10]
-nrand=1
+nrand=6
 trees=10
 """
 nsim = number of simulations
@@ -52,11 +52,11 @@ if nrand>0:
             pcorr[i].append(idf[yvar].corr(idf[col_name]))
 
 
-        X = np.array(idf[yvar])
-        Y = np.array(idf.drop(yvar,axis=1))
+        Y = np.array(idf[yvar])
+        X = np.array(idf.drop(yvar,axis=1))
         
         # Split the data into training and testing sets
-        train_features, test_features, train_labels, test_labels = train_test_split(Y, X, test_size = 0.25)
+        train_features, test_features, train_labels, test_labels = train_test_split(X, Y, test_size = 0.25)
         rf = RandomForestRegressor(n_estimators=trees, max_depth=len(xvar))
         rf.fit(train_features, train_labels);
         
@@ -89,15 +89,15 @@ if nrand>0:
     plt.scatter(mae, accu, c=colors, alpha=0.3)
     plt.xlabel('Scatter MAE vs. Accuracy')
 
-    plt.suptitle("Random Forests")
+    plt.suptitle("Random Forests with "+str(nrand)+" random variable/s")
     plt.show()
 
 else:
-    X = np.array(df[yvar])
-    Y = np.array(df.drop(yvar,axis=1))
+    Y = np.array(df[yvar])
+    X = np.array(df.drop(yvar,axis=1))
     
     # Split the data into training and testing sets
-    train_features, test_features, train_labels, test_labels = train_test_split(Y, X, test_size = 0.25)
+    train_features, test_features, train_labels, test_labels = train_test_split(X, Y, test_size = 0.25)
     
     # Instantiate model with 100 decision trees
     rf = RandomForestRegressor(n_estimators=100, max_depth=len(xvar))

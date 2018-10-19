@@ -15,7 +15,7 @@ Set parameters below
 
 """
 nsim=1000
-prand=0.01
+prand=0.05
 trees=10
 """
 nsim = number of simulations
@@ -41,11 +41,11 @@ for s in range(nsim):
 
     ndf=pd.concat([idf,tdf])
     
-    X = np.array(ndf[yvar])
-    Y = np.array(ndf.drop(yvar,axis=1))
+    Y = np.array(ndf[yvar])
+    X = np.array(ndf.drop(yvar,axis=1))
     
     # Split the data into training and testing sets
-    train_features, test_features, train_labels, test_labels = train_test_split(Y, X, test_size = 0.25)
+    train_features, test_features, train_labels, test_labels = train_test_split(X, Y, test_size = 0.25)
     rf = RandomForestRegressor(n_estimators=trees, max_depth=len(xvar))
     rf.fit(train_features, train_labels);
     
@@ -60,7 +60,7 @@ for s in range(nsim):
 plt.figure(figsize=(8,6))
 plt.subplot(2, 1, 1)
 plt.hist(mae, bins = 20, color='g')
-plt.title('Random Forest Bootstrap='+str(nsim)+' '+str(prand)+'% Rnd')
+plt.title('Random Forest Bootstrap='+str(nsim)+' '+str(prand*100)+'% Rnd')
 plt.ylabel('MAE')
 
 plt.subplot(2, 1, 2)
