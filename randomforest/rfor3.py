@@ -71,9 +71,9 @@ plt.figure(figsize=(10,6))
 ##plt.ylabel('RMSE')
 ##plt.xlabel('Random observations in Test Set n='+str(nrange))
 #
-h=sns.jointplot(x=xval, y=accu, color='m', alpha=0.5, kind="kde")
+h=sns.jointplot(x=xval, y=accu, color='c', alpha=0.5, kind="kde")
 h.set_axis_labels('x', 'y', fontsize=12)
 h.ax_joint.set_ylabel('Accuracy')
-h.ax_joint.set_xlabel('Test Set of n=5 to '+str(nrange)+' random observations')
+h.ax_joint.set_xlabel('Test Set with n=5 to '+str(nrange)+' random observations')
 
 plt.show()
